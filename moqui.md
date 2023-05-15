@@ -1,4 +1,4 @@
-# Moqui framework and Apache OFBiz Job (Based upon data model supported in [Job Manager](https://github.com/hotwax/job-manager) ) Comparison
+# Moqui framework and Apache OFBiz Job (Based upon data model supported in [Job Manager](https://github.com/hotwax/job-manager)) Comparison
 
 ## Enitites:
 
@@ -33,7 +33,7 @@ Stores Parameters for specific job
 ### moqui.service.job.ServiceJobRun
 - jobRunId (Primary key)
 - jobName
-- userId The user that initiated the job run
+- userId - The user that initiated the job run
 - parameters
 - results
 - messages
@@ -45,4 +45,60 @@ Stores Parameters for specific job
 - startTime
 - endTime
 - lastUpdatedStamp
+
+
+### moqui.service.job.ServiceJobRunLock
+
+- jobName
+- jobRunId - If not null this is the currently running job instance.
+- lastRunTime
+- lastUpdatedStamp
+
+
+### moqui.service.job.ServiceJobUser
+Associates Job with user to identify sending notifications
+- jobName (Primary key)
+- userId (Primary key)
+- receiveNotifications If Y this user will receive notifications
+- lastUpdatedStamp
+
+
+### Job Sandbox
+- jobId
+- jobName
+- runTime
+- priority
+- poolId
+- statusId
+- parentJobId
+- previousJobId
+- serviceName
+- loaderName
+- maxRetry
+- currentRetryCount
+- authUserLoginId
+- runAsUser
+- runtimeDataId
+- tempExprId
+- currentRecurrenceCount
+- maxRecurrenceCount
+- runByInstanceId
+- startDateTime
+- finishDateTime
+- cancelDateTime
+- jobResult
+- recurrenceTimeZone
+- systemJobEnumId
+- productStoreId
+- createdDate
+- createdByUserLogin
+- lastModifiedByUserLogin
+
+
+
+## Comparison
+
+In OFBiz, we have single entity Job Sandbox for storing jobs which may be draft(custom), pending, running and already executed while in Moqui we have ServiceJob for scheduling the jobs while ServiceJobRun for running & executed jobs information. 
+Runtime parametes are store in RunTimeData in xml format while there is entry for each parameter in ServiceJobParameter entity.
+
 
