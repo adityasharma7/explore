@@ -110,7 +110,7 @@ For skip operation fromDate could be modified to later date, we could use librar
 For cancel operation thruDate could be modified to now.
 
 
-We will need field systemJobEnumId in ServiceJob to identify similar jobs. We could use jobName to get ServiceJobParameter and ServiceJobRun.
+We will need field systemJobEnumId in ServiceJob to identify similar jobs. We could continue to use jobName to get ServiceJobParameter and ServiceJobRun.
 
 We will need fields productStoreId and shopifyShopId in ServiceJob to identify jobs for specific stores.
 
