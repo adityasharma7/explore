@@ -90,15 +90,28 @@ Associates Job with user to identify sending notifications
 - recurrenceTimeZone
 - systemJobEnumId
 - productStoreId
+- shopifyShopId
 - createdDate
 - createdByUserLogin
 - lastModifiedByUserLogin
 
 
 
-## Comparison
+## Inferences
 
-In OFBiz, we have single entity Job Sandbox for storing jobs which may be draft(custom), pending, running and already executed while in Moqui we have ServiceJob for scheduling the jobs while ServiceJobRun for running & executed jobs information. 
-Runtime parametes are store in RunTimeData in xml format while there is entry for each parameter in ServiceJobParameter entity.
+In OFBiz, we have single entity Job Sandbox for storing jobs which may be draft(custom), pending, running and already executed while in Moqui we have ServiceJob for scheduling the jobs while ServiceJobRun for running & executed jobs information. I think it would be much simpler querying the scheduled jobs and history as being in separate entities.
+
+We could use paused field to identify draft jobs.
+
+In OFBiz, runtime parameters are stored in RunTimeData in xml format while there is entry for each parameter in ServiceJobParameter entity. I think it would be much simpler to handle data now.
+
+There is no run time field, but there is fromDate and thrueDate for handling the schedule for job. We could set the fromDate with date time for job to start and thru date to discontinue. 
+For skip operation fromDate could be modified to later date, we could use library like [cron-parser](https://www.npmjs.com/package/cron-parser) for it.
+For cancel operation thruDate could be modified to now.
 
 
+We will need field systemJobEnumId in ServiceJob to identify similar jobs. We could use jobName to get ServiceJobParameter and ServiceJobRun.
+
+We will need fields productStoreId and shopifyShopId in ServiceJob to identify jobs for specific stores.
+
+Instead of temporal expression, [cron expressions](https://www.ibm.com/docs/en/db2oc?topic=task-unix-cron-format) are used in Moqui, we could use libraries like [cron-time-generator](https://www.npmjs.com/package/cron-time-generator) that will help easily generate cron format.
