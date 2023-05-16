@@ -62,7 +62,6 @@ Associates Job with user to identify sending notifications
 - receiveNotifications If Y this user will receive notifications
 - lastUpdatedStamp
 
-
 ### Job Sandbox
 - jobId
 - jobName
@@ -115,3 +114,9 @@ We will need field systemJobEnumId in ServiceJob to identify similar jobs. We co
 We will need fields productStoreId and shopifyShopId in ServiceJob to identify jobs for specific stores.
 
 Instead of temporal expression, [cron expressions](https://www.ibm.com/docs/en/db2oc?topic=task-unix-cron-format) are used in Moqui, we could use libraries like [cron-time-generator](https://www.npmjs.com/package/cron-time-generator) that will help easily generate cron format.
+
+Couldn't find any field related to timezone similar to OFBiz's recurrenceTimeZone.
+
+Couldn't find any field related to timezone similar to OFBiz's recurrenceTimeZone.
+
+moqui.security.UserPreference entity could be used for storing the pinned jobs by user
